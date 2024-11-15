@@ -4,7 +4,6 @@ package com.ecom;
  * Hello world!
  *
  */
-
 public class App 
 {
     public static void main( String[] args )
