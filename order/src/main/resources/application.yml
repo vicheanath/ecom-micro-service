@@ -1,0 +1,19 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  jpa:
+    hibernate:
+        ddl-auto: update
+    show-sql: true
+  datasource:
+        url: jdbc:mysql://localhost:3386/order_db
+        username: order_user
+        password: order_password
+server:
+    port: 8086
+springdoc:
+  api-docs:
+    path: /swagger-ui.html

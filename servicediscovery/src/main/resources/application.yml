@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: discoveryserver
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: discoveryserver
+    appname: EurekaCluster
+  environment: local
+  client:
+    #    serviceUrl:
+    #      defaultZone: http://eurekaserver2:8762/eureka/
+    register-with-eureka: true
+    fetch-registry: true
