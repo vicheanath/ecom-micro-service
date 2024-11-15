@@ -1,0 +1,11 @@
+com/ecom/infrastructure/AbstractJpaRepository.class
+com/ecom/infrastructure/events/SpingDomainEventPublisher.class
+com/ecom/application/Query.class
+com/ecom/domain/AggregateRoot.class
+com/ecom/application/Command.class
+com/ecom/application/QueryHandler.class
+com/ecom/domain/ValueObject.class
+com/ecom/domain/BaseEntity.class
+com/ecom/domain/DomainEventPublisher.class
+com/ecom/domain/DomainEvent.class
+com/ecom/application/CommandHandler.class
