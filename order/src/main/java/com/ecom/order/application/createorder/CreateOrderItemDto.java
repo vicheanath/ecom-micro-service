@@ -7,4 +7,5 @@ import lombok.Data;
 public class CreateOrderItemDto {
     private String productId;
     private int quantity;
+    private float price;
 }
