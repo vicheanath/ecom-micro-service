@@ -7,10 +7,7 @@ import com.ecom.order.application.getorder.GetOrderQueryResponse;
 import com.ecom.shared.application.CommandHandler;
 import com.ecom.shared.application.QueryHandler;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +27,11 @@ public class OrderController {
     @GetMapping()
     public ResponseEntity<List<GetOrderQueryResponse>> getOrder() {
         return ResponseEntity.ok(getOrderQueryHandler.handle(new GetOrderQuery()));
+    }
+
+    @PostMapping()
+    public ResponseEntity<Void> createOrder(@RequestBody CreateOrderCommand createOrderCommand) {
+        createOrderCommandHandler.handle(createOrderCommand);
+        return ResponseEntity.ok().build();
     }
 }
