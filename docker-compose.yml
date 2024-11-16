@@ -1,0 +1,47 @@
+version: "3.2"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: "rabbitmq"
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq
+    restart: unless-stopped
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: order_db
+      PMA_PORT: 3306
+      PMA_USER: order_user
+      PMA_PASSWORD: order_password
+    ports:
+      - 8088:80
+    networks:
+      - rabbitmq
+    restart: unless-stopped
+
+  order_db:
+    image: mysql
+    container_name: "order_db"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: order_db
+      MYSQL_USER: order_user
+      MYSQL_PASSWORD: order_password
+    ports:
+      - 3386:3306
+    volumes:
+      - ~/.docker-conf/mysql/data/:/var/lib/mysql
+      - ~/.docker-conf/mysql/conf/:/etc/mysql/conf.d
+    networks:
+      - rabbitmq
+    restart: unless-stopped
+
+networks:
+    rabbitmq:
+        driver: bridge

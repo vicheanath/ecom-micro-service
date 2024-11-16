@@ -30,4 +30,9 @@ public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCo
         userRepository.save(user);
 
     }
+
+    @Override
+    public Class<UserRegisterCommand> getSupportedCommand() {
+        return UserRegisterCommand.class;
+    }
 }

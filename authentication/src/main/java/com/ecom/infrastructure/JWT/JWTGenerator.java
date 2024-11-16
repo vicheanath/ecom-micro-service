@@ -1,5 +1,6 @@
 package com.ecom.infrastructure.JWT;
 
+import com.ecom.domain.entity.Role;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import java.util.List;
 @Component
 public class JWTGenerator {
     private String secret = "";
-    public String generateToken(String username, List<String> role) {
+    public String generateToken(String username, List<Role> role) {
         return Jwts.builder()
                 .setSubject(username)
                 .claim("role", role)

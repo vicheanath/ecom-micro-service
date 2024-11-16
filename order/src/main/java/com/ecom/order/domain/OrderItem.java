@@ -1,24 +1,37 @@
 package com.ecom.order.domain;
 
 import com.ecom.shared.domain.ValueObject;
-import lombok.Getter;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.UUID;
-@Getter
+
+@Entity
+@Table(name = "order_items")
+@Data
 public class OrderItem extends ValueObject {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private UUID productId;
+
     private int quantity;
-    private float unitPrice;
 
-    private OrderItem(UUID id, UUID productId, int quantity, float unitPrice) {
-        this.id = id;
-        this.productId = productId;
+    @ManyToOne
+    private Order order;
+
+    private float price;
+
+    private UUID productId;
+
+    public OrderItem() {
+    }
+
+    public OrderItem( int quantity, float price, UUID productId) {
+
         this.quantity = quantity;
-        this.unitPrice = unitPrice;
+        this.price = price;
+        this.productId = productId;
     }
 
-    public static OrderItem create(UUID id, UUID productId, int quantity, float unitPrice) {
-        return new OrderItem(id, productId, quantity, unitPrice);
-    }
+
 }

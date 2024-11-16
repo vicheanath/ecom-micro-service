@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public class CreateOrderCommandHandler implements CommandHandler<CreateOrderCommand> {
 
-    private final OrderRepository orderRepository;
+    private  OrderRepository orderRepository;
 
     public CreateOrderCommandHandler(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -20,20 +20,25 @@ public class CreateOrderCommandHandler implements CommandHandler<CreateOrderComm
     @Override
     public void handle(CreateOrderCommand command) {
 
-        var order =  Order.create(
+        var order = Order.create(
                 UUID.randomUUID(),
                 UUID.fromString(command.getCustomerId())
         );
 
-//        command.getOrderItems().forEach(orderItem -> {
-//
-//            var item = OrderItem.create(
-//                    UUID.randomUUID(),
-//                    UUID.fromString(orderItem.productId()),
-//                        orderItem.quantity()
-//            );
-//            order.addOrderItem(item);
-//        });
+        command.getOrderItems().forEach(orderItem -> {
+            var item = new OrderItem(
+                    orderItem.getQuantity(),
+                    orderItem.getPrice(),
+                    UUID.fromString(orderItem.getProductId())
+            );
+            order.addOrderItem(item);
+        });
 
+        orderRepository.save(order);
+    }
+
+    @Override
+    public Class<CreateOrderCommand> getSupportedCommand() {
+        return CreateOrderCommand.class;
     }
 }
