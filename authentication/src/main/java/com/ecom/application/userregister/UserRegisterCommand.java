@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserRegisterCommand implements Command {
+public class UserRegisterCommand implements Command<Void> {
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 20,message = "Username must be between 3 and 20 characters")
     private String username;

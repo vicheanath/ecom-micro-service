@@ -1,11 +1,12 @@
 package com.ecom.application.userlogin;
 
+import com.ecom.application.responses.UserLoginResponse;
 import com.ecom.shared.application.Command;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class UserLoginCommand implements Command {
+public class UserLoginCommand implements Command<UserLoginResponse> {
     @NotBlank
     private String username;
     @NotBlank

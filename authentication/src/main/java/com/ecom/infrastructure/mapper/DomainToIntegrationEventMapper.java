@@ -1,7 +1,6 @@
 package com.ecom.infrastructure.mapper;
 
 import com.ecom.domain.event.UserRegisterEvent;
-import com.integration.OrderCreatedIntegrationEvent;
 import com.integration.UserRegisterIntegrationEvent;
 import org.springframework.stereotype.Component;
 

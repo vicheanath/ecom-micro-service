@@ -1,4 +1,4 @@
-package com.ecom.order.application.eventhandler;
+package com.ecom.order.application.createorder;
 
 import com.ecom.order.domain.events.OrderCreatedEvent;
 import com.ecom.order.infrastructure.mapper.DomainToIntegrationEventMapper;

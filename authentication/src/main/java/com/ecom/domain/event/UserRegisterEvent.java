@@ -24,4 +24,9 @@ public class UserRegisterEvent implements DomainEvent {
     public Instant getOccurredOn() {
         return Instant.now();
     }
+
+    @Override
+    public void setOccurredOn(Instant occurredOn) {
+
+    }
 }

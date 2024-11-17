@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCommand> {
+public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCommand,Void> {
 
 
     @Autowired
@@ -24,7 +24,7 @@ public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCo
         this.roleRepository = roleRepository;
     }
     @Override
-    public void handle(UserRegisterCommand command) {
+    public Void handle(UserRegisterCommand command) {
         var user = userRepository.findByUsername(command.getUsername());
         if (user != null) {
             throw new RuntimeException("User already exists");
@@ -43,10 +43,9 @@ public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCo
         );
         user.addRole(role);
         userRepository.save(user);
+        return null;
     }
 
-    @Override
-    public Class<UserRegisterCommand> getSupportedCommand() {
-        return UserRegisterCommand.class;
-    }
+
+
 }

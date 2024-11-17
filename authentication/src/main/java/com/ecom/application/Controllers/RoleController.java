@@ -2,7 +2,7 @@ package com.ecom.application.Controllers;
 
 import com.ecom.application.createrole.CreateNewRoleCommand;
 import com.ecom.shared.application.BaseReponse;
-import com.ecom.shared.application.Mediator;
+import com.ecom.shared.infrastructure.Mediator;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

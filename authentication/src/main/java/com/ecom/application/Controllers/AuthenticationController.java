@@ -4,7 +4,7 @@ import com.ecom.application.userlogin.UserLoginCommand;
 import com.ecom.application.userregister.UserRegisterCommand;
 import com.ecom.application.responses.UserLoginResponse;
 import com.ecom.application.responses.UserRegisterResponse;
-import com.ecom.shared.application.Mediator;
+import com.ecom.shared.infrastructure.Mediator;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 
-   private final Mediator mediator;
+    private final Mediator mediator;
 
    public AuthenticationController(Mediator mediator) {
        this.mediator = mediator;
@@ -30,8 +30,10 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginCommand command)
     {
-        UserLoginResponse response = mediator.send(command, UserLoginResponse.class);
-        System.out.println("Token: " + response.getToken());
-        return ResponseEntity.ok(response);
+        var response = mediator.send(command);
+        if(response != null) {
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

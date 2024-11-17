@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CreateNewRoleCommand implements Command {
+public class CreateNewRoleCommand implements Command<Void> {
     private String roleName;
     private String permission;
 

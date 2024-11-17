@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class CreateOrderCommandHandler implements CommandHandler<CreateOrderCommand> {
+public class CreateOrderCommandHandler implements CommandHandler<CreateOrderCommand,Void> {
 
     private  OrderRepository orderRepository;
 
@@ -18,7 +18,7 @@ public class CreateOrderCommandHandler implements CommandHandler<CreateOrderComm
     }
 
     @Override
-    public void handle(CreateOrderCommand command) {
+    public Void handle(CreateOrderCommand command) {
 
         var order = Order.create(
                 UUID.randomUUID(),
@@ -35,10 +35,8 @@ public class CreateOrderCommandHandler implements CommandHandler<CreateOrderComm
         });
 
         orderRepository.save(order);
+
+        return null;
     }
 
-    @Override
-    public Class<CreateOrderCommand> getSupportedCommand() {
-        return CreateOrderCommand.class;
-    }
 }

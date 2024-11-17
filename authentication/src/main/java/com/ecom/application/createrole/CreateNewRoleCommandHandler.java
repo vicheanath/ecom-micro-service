@@ -7,24 +7,21 @@ import com.ecom.shared.application.CommandHandler;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateNewRoleCommandHandler implements CommandHandler<CreateNewRoleCommand> {
+public class CreateNewRoleCommandHandler implements CommandHandler<CreateNewRoleCommand,Void> {
     private RoleRepository roleRepository;
 
     public CreateNewRoleCommandHandler(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
     @Override
-    public void handle(CreateNewRoleCommand command) {
+    public Void handle(CreateNewRoleCommand command) {
         var role = roleRepository.findByName(command.getRoleName());
         if(role != null) {
             throw new IllegalArgumentException("Role already exists");
         }
         role = new Role(command.getRoleName());
         roleRepository.save(role);
+        return null;
     }
 
-    @Override
-    public Class<CreateNewRoleCommand> getSupportedCommand() {
-        return CreateNewRoleCommand.class;
-    }
 }
