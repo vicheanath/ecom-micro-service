@@ -1,5 +1,5 @@
 package com.ecom.shared.application;
 
-public interface CommandHandler<C extends Command> {
-    void handle(C command);
+public interface CommandHandler<C extends Command<R>, R> {
+    R handle(C command);
 }

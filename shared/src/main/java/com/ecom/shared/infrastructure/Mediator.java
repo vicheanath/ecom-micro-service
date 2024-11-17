@@ -1,4 +1,4 @@
-package com.ecom.caltalog.infrastructure;
+package com.ecom.shared.infrastructure;
 
 
 import com.ecom.shared.application.Command;

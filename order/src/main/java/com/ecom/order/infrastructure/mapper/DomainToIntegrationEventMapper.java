@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 public class DomainToIntegrationEventMapper {
 
     public OrderCreatedIntegrationEvent toIntegrationEvent(OrderCreatedEvent domainEvent) {
-        return new OrderCreatedIntegrationEvent( domainEvent.getOrderId(), domainEvent.getCustomerId(), domainEvent.getTotal()
-
-        );
+        return new OrderCreatedIntegrationEvent( domainEvent.getOrderId(), domainEvent.getCustomerId(), domainEvent.getTotal());
     }
 }

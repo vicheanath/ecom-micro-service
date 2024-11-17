@@ -1,3 +1,5 @@
 package com.ecom.shared.application;
 
-public interface Command {}
+public interface Command<R> {
+
+}

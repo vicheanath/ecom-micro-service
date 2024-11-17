@@ -42,6 +42,34 @@ services:
       - rabbitmq
     restart: unless-stopped
 
+  mongo:
+    image: mongo
+    container_name: "mongo"
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
+        MONGO_INITDB_DATABASE: catalog_db
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/.docker-conf/mongo/data/:/data/db
+    networks:
+      - rabbitmq
+    restart: unless-stopped
+
+  mongo-express:
+    image: mongo-express
+    container_name: "mongo-express"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: root
+    ports:
+      - 8081:8081
+    networks:
+      - rabbitmq
+    restart: unless-stopped
+
 networks:
     rabbitmq:
         driver: bridge

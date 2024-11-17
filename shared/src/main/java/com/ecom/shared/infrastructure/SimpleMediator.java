@@ -1,4 +1,4 @@
-package com.ecom.caltalog.infrastructure;
+package com.ecom.shared.infrastructure;
 
 import com.ecom.shared.application.Command;
 import com.ecom.shared.application.CommandHandler;
@@ -26,12 +26,14 @@ public class SimpleMediator implements Mediator {
     @SuppressWarnings("unchecked")
     @Override
     public <R, Q extends Query<R>> R ask(Q query) {
+
         QueryHandler<Q, R> handler = (QueryHandler<Q, R>) applicationContext.getBean(getHandlerName(query.getClass()));
         return handler.handle(query);
     }
 
 
     private String getHandlerName(Class<?> commandOrQueryClass) {
-        return commandOrQueryClass.getSimpleName() + "Handler";
+        String simpleName = commandOrQueryClass.getSimpleName() + "Handler";
+        return Character.toLowerCase(simpleName.charAt(0)) + simpleName.substring(1);
     }
 }
