@@ -1,6 +1,6 @@
-package com.ecom.application.CommandHandlers;
+package com.ecom.application.createrole;
 
-import com.ecom.application.Commands.CreateNewRoleCommand;
+import com.ecom.application.createrole.CreateNewRoleCommand;
 import com.ecom.domain.entity.Role;
 import com.ecom.domain.repositories.RoleRepository;
 import com.ecom.shared.application.CommandHandler;

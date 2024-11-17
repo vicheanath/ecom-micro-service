@@ -1,4 +1,4 @@
-package com.ecom.application.Commands;
+package com.ecom.application.createrole;
 
 import com.ecom.shared.application.Command;
 import lombok.Data;

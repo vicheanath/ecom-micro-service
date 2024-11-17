@@ -1,6 +1,6 @@
 package com.ecom.application.Controllers;
 
-import com.ecom.application.Commands.CreateNewRoleCommand;
+import com.ecom.application.createrole.CreateNewRoleCommand;
 import com.ecom.shared.application.BaseReponse;
 import com.ecom.shared.application.Mediator;
 import org.springframework.web.bind.annotation.PostMapping;

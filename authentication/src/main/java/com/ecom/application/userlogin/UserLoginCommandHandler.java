@@ -1,11 +1,9 @@
-package com.ecom.application.CommandHandlers;
+package com.ecom.application.userlogin;
 
-import com.ecom.application.Commands.UserLoginCommand;
 import com.ecom.application.responses.UserLoginResponse;
 import com.ecom.domain.repositories.RoleRepository;
 import com.ecom.domain.repositories.UserRepository;
 import com.ecom.infrastructure.JWT.JWTGenerator;
-import com.ecom.shared.application.CommandHandler;
 import com.ecom.shared.application.CommandHandlerWithResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,11 +28,12 @@ public class UserLoginCommandHandler implements CommandHandlerWithResponse<UserL
     public UserLoginResponse handle(UserLoginCommand command) {
         var user = userRepository.findByUsername(command.getUsername());
         if (user != null && passwordEncoder.matches(command.getPassword(), user.getPassword())) {
-           var roles = user.getRoleList();
+           var roles = user.getRoles();
             var token = jwtGenerator.generateToken(
                     user.getUsername(),
                     roles
             );
+            System.out.println("Token: " + token);
             return new UserLoginResponse(token, user.getUsername());
         }
         return null;

@@ -1,8 +1,10 @@
-package com.ecom.application.Commands;
+package com.ecom.application.userlogin;
 
 import com.ecom.shared.application.Command;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 public class UserLoginCommand implements Command {
     @NotBlank
     private String username;
@@ -12,6 +14,8 @@ public class UserLoginCommand implements Command {
     public UserLoginCommand(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+    public UserLoginCommand() {
     }
 
     public String getUsername() {

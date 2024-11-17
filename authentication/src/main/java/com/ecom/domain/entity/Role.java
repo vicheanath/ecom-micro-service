@@ -19,7 +19,7 @@ public class Role {
     private UUID id;
     private  String name;
     private String permission;
-    @ManyToMany(mappedBy = "roleList")
+    @ManyToMany(mappedBy = "roles")
     List<User> users;
 
     public Role(String name) {
