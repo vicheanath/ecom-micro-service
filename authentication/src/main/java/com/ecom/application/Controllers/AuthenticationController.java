@@ -6,6 +6,7 @@ import com.ecom.application.responses.UserLoginResponse;
 import com.ecom.application.responses.UserRegisterResponse;
 import com.ecom.shared.application.CommandHandler;
 import com.ecom.shared.application.CommandHandlerWithResponse;
+import com.ecom.shared.application.Mediator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,27 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 
-    private CommandHandler<UserRegisterCommand> userRegisterCommandHandler;
-    private CommandHandlerWithResponse<UserLoginCommand,UserLoginResponse> userLoginCommandHandler;
+   private final Mediator mediator;
 
-    public AuthenticationController(CommandHandler<UserRegisterCommand> userRegisterCommandHandler
-    , CommandHandlerWithResponse<UserLoginCommand,UserLoginResponse> userLoginCommandHandler) {
-        this.userRegisterCommandHandler = userRegisterCommandHandler;
-        this.userLoginCommandHandler = userLoginCommandHandler;
+   public AuthenticationController(Mediator mediator) {
+       this.mediator = mediator;
     }
+
     @PostMapping("/register")
     public ResponseEntity<UserRegisterResponse> register(@RequestBody UserRegisterCommand command) {
-        userRegisterCommandHandler.handle(command);
+        mediator.send(command);
         return ResponseEntity.ok(new UserRegisterResponse(command.getUsername(), command.getEmail()));
     }
     @PostMapping("/login")
     public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginCommand command)
     {
-        var response = userLoginCommandHandler.handle(command);
-        if(response == null)
-        {
-            return ResponseEntity.badRequest().build();
-        }
+        UserLoginResponse response = mediator.send(command, UserLoginResponse.class);
         return ResponseEntity.ok(response);
     }
 }

@@ -20,13 +20,13 @@ public class UserRegisterCommand implements Command {
 
     private String password;
     private String email;
-    private List<Role> roleList;
+    private String role;
 
-    public UserRegisterCommand(String username, String password, String email, List<Role> roleList) {
+    public UserRegisterCommand(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.roleList = roleList;
+        this.role = role;
     }
 
     public String getUsername() {
