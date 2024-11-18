@@ -1,4 +1,4 @@
-package com.ecom.order.infrastructure;
+package com.ecom.cart.infrastructure;
 
 import com.ecom.shared.domain.AggregateRoot;
 import com.ecom.shared.domain.DomainEvent;

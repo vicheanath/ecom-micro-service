@@ -1,6 +1,6 @@
 spring:
   application:
-        name: order-service
+        name: cart-service
   rabbitmq:
     addresses: localhost:5672
     username: guest
@@ -10,9 +10,9 @@ spring:
         ddl-auto: update
     show-sql: true
   datasource:
-        url: jdbc:mysql://localhost:3386/db_order
-        username: user_db_order
-        password: password_user_db_order
+        url: jdbc:mysql://localhost:3386/db_payment
+        username: user_db_payment
+        password: password_user_db_payment
 server:
     port: 8086
 

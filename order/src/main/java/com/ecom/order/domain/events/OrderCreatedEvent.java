@@ -17,9 +17,4 @@ public class OrderCreatedEvent extends BaseDomainEvent {
         this.customerId = customerId;
         this.total = total;
     }
-
-    @Override
-    public Instant getOccurredOn() {
-        return Instant.now();
-    }
 }
