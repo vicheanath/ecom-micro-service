@@ -1,6 +1,6 @@
 spring:
   application:
-        name: order-service
+        name: cart-service
   rabbitmq:
     addresses: localhost:5672
     username: guest
