@@ -21,9 +21,4 @@ public class UserRegisterEvent extends BaseDomainEvent {
         this.role = role;
     }
 
-    @Override
-    public Instant getOccurredOn() {
-        return Instant.now();
-    }
-
 }

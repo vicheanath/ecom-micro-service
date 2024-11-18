@@ -12,32 +12,39 @@ services:
     networks:
       - rabbitmq
     restart: unless-stopped
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: order_db
-      PMA_PORT: 3306
-      PMA_USER: order_user
-      PMA_PASSWORD: order_password
-    ports:
-      - 8088:80
-    networks:
-      - rabbitmq
-    restart: unless-stopped
 
-  order_db:
+
+
+  mysqldb:
     image: mysql
-    container_name: "order_db"
+    container_name: "db"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: order_db
-      MYSQL_USER: order_user
-      MYSQL_PASSWORD: order_password
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    command:
+      - --init-file
+      - /docker-entrypoint-initdb.d/init.sql
     ports:
       - 3386:3306
     volumes:
       - ~/.docker-conf/mysql/data/:/var/lib/mysql
       - ~/.docker-conf/mysql/conf/:/etc/mysql/conf.d
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rabbitmq
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "phpmyadmin"
+    environment:
+      PMA_HOST: mysqldb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - 8008:80
     networks:
       - rabbitmq
     restart: unless-stopped
@@ -53,19 +60,6 @@ services:
       - 27017:27017
     volumes:
       - ~/.docker-conf/mongo/data/:/data/db
-    networks:
-      - rabbitmq
-    restart: unless-stopped
-
-  mongo-express:
-    image: mongo-express
-    container_name: "mongo-express"
-    environment:
-      ME_CONFIG_MONGODB_SERVER: mongo
-      ME_CONFIG_BASICAUTH_USERNAME: root
-      ME_CONFIG_BASICAUTH_PASSWORD: root
-    ports:
-      - 8081:8081
     networks:
       - rabbitmq
     restart: unless-stopped

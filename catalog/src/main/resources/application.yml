@@ -1,0 +1,21 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: catalog-service
+  data:
+        mongodb:
+            uri: mongodb://localhost:27017/catalog_db
+            database: catalog_db
+
+  rabbitmq:
+        addresses: localhost:5672
+        username: guest
+        password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
