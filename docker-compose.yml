@@ -13,11 +13,8 @@ services:
       - rabbitmq
     restart: unless-stopped
 
-
-
   mysqldb:
     image: mysql
-    container_name: "db"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
