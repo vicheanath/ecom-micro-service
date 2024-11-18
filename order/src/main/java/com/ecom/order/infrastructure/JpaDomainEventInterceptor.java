@@ -5,17 +5,15 @@ import com.ecom.shared.domain.DomainEvent;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostUpdate;
 import jakarta.persistence.PreRemove;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JpaDomainEventInterceptor {
 
+    @Autowired
     private static ApplicationEventPublisher eventPublisher;
-
-    public JpaDomainEventInterceptor(ApplicationEventPublisher eventPublisher) {
-        this.eventPublisher = eventPublisher;
-    }
 
     @PostPersist
     @PostUpdate
