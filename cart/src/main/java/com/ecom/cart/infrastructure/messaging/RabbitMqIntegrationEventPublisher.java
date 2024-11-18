@@ -1,4 +1,4 @@
-package com.ecom.order.infrastructure.messaging;
+package com.ecom.cart.infrastructure.messaging;
 
 import com.integration.IntegrationEvent;
 import org.springframework.amqp.core.AmqpTemplate;

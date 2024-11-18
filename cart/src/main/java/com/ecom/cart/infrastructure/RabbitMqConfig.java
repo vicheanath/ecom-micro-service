@@ -1,4 +1,4 @@
-package com.ecom.order.infrastructure;
+package com.ecom.cart.infrastructure;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -10,9 +10,9 @@ spring:
         ddl-auto: update
     show-sql: true
   datasource:
-        url: jdbc:mysql://localhost:3386/db_order
-        username: user_db_order
-        password: password_user_db_order
+        url: jdbc:mysql://localhost:3386/db_inventory
+        username: user_db_inventory
+        password: password_user_db_inventory
 server:
     port: 8086
 

@@ -1,5 +1,6 @@
 package com.ecom.domain.event;
 
+import com.ecom.shared.domain.BaseDomainEvent;
 import com.ecom.shared.domain.DomainEvent;
 import lombok.Data;
 
@@ -7,7 +8,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Data
-public class UserRegisterEvent implements DomainEvent {
+public class UserRegisterEvent extends BaseDomainEvent {
     private final UUID userId;
     private final String username;
     private final String email;
@@ -20,13 +21,4 @@ public class UserRegisterEvent implements DomainEvent {
         this.role = role;
     }
 
-    @Override
-    public Instant getOccurredOn() {
-        return Instant.now();
-    }
-
-    @Override
-    public void setOccurredOn(Instant occurredOn) {
-
-    }
 }
