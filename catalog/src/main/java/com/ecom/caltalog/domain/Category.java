@@ -13,7 +13,6 @@ import java.util.List;
 
 @Getter
 @Document(collection = "categories")
-@EntityListeners(JpaDomainEventInterceptor.class)
 public class Category {
 
     @Id
