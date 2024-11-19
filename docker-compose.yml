@@ -18,8 +18,6 @@ services:
     container_name: "mysqldb"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     command:
       - --init-file
       - /docker-entrypoint-initdb.d/init.sql
@@ -75,6 +73,41 @@ services:
         ME_CONFIG_BASICAUTH: false
       networks:
         - rabbitmq
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      - KEYCLOAK_DB=postgres
+      - KEYCLOAK_DB_VENDOR=postgres
+      - KEYCLOAK_DB_URL=jdbc:postgresql://localhost:5436/keycloak
+      - KEYCLOAK_DB_USERNAME=keycloak
+      - KEYCLOAK_DB_PASSWORD=password
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=adminpassword
+      - KEYCLOAK_LOGLEVEL=INFO
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    command:
+      - start-dev
+    networks:
+      - rabbitmq
+
+  postgres:
+      image: postgres:13
+      environment:
+        - POSTGRES_DB=keycloak
+        - POSTGRES_USER=keycloak
+        - POSTGRES_PASSWORD=password
+      ports:
+        - "5436:5432"
+      volumes:
+        - postgres-data:/var/lib/postgresql/data
+      networks:
+        - rabbitmq
+
+volumes:
+    postgres-data:
 
 networks:
     rabbitmq:

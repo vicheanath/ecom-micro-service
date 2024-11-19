@@ -4,6 +4,22 @@ server:
 spring:
   application:
         name: gateway-service
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/ecomerce
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: ecommerce
+#            client-secret: Lg6uFtBnA4Hqg2MHt0HQ478gXVJbOIFp
+#            authorization-grant-type: client_credentials
+#            scope: openid
+#            provider: keycloak
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8080/realms/ecomerce
   main:
     web-application-type: reactive
   cloud:
@@ -29,11 +45,10 @@ spring:
           filters:
             - PrefixPath=/api
 
-
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka.local:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 
 management:
   endpoints:
@@ -46,3 +61,4 @@ management:
 logging:
     level:
         org.springframework.cloud.gateway: DEBUG
+        org.springframework.security: DEBUG

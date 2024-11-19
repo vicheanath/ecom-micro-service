@@ -3,6 +3,11 @@ server:
 spring:
   application:
         name: auth-service
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8080/realms/ecomerce
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,11 +19,9 @@ spring:
     username: user_db_user
     password: password_user_db_user
 eureka:
-    client:
-      service-url:
-        defaultZone: http://eureka.local:8761/eureka/
-    instance:
-        prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 management:
   endpoints:
     web:
@@ -27,4 +30,6 @@ management:
 springdoc:
   swagger-ui:
     enabled: true
-    path: /user/swagger-ui.html
+    path: /auth/swagger-ui.html
+
+
