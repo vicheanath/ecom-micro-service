@@ -9,14 +9,14 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://localhost:3386/user_db
+    url: jdbc:mysql://localhost:3386/db_user
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
+    username: user_db_user
+    password: password_user_db_user
 eureka:
     client:
       service-url:
-        defaultZone: http://localhost:8761/eureka/
+        defaultZone: http://eureka.local:8761/eureka/
     instance:
         prefer-ip-address: false
 management:
@@ -24,3 +24,7 @@ management:
     web:
       exposure:
         include: "*"
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /user/swagger-ui.html

@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "PMS API",
+                title = "Payment API",
                 version = "1.0.0",
-                description = "Order Management API"
+                description = "Documentation Payment API v1.0.0"
         )
 )
 
