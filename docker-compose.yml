@@ -15,6 +15,7 @@ services:
 
   mysqldb:
     image: mysql
+    container_name: "mysqldb"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: root
@@ -46,20 +47,34 @@ services:
       - rabbitmq
     restart: unless-stopped
 
-  mongo:
+  mongodb:
     image: mongo
-    container_name: "mongo"
+    container_name: "mongodb"
+    restart: always
     environment:
-        MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: root
-        MONGO_INITDB_DATABASE: catalog_db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: catalog_db
     ports:
       - 27017:27017
-    volumes:
-      - ~/.docker-conf/mongo/data/:/data/db
     networks:
-      - rabbitmq
-    restart: unless-stopped
+        - rabbitmq
+    volumes:
+      - ~/.docker-conf/mongodb/data:/data/db
+
+  mongo-express:
+      image: mongo-express
+      container_name: "mongo-express"
+      restart: always
+      ports:
+        - 8009:8081
+      environment:
+        ME_CONFIG_MONGODB_ADMINUSERNAME: root
+        ME_CONFIG_MONGODB_ADMINPASSWORD: example
+        ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb:27017/
+        ME_CONFIG_BASICAUTH: false
+      networks:
+        - rabbitmq
 
 networks:
     rabbitmq:

@@ -4,9 +4,12 @@ spring:
   application:
     name: catalog-service
   data:
-        mongodb:
-            uri: mongodb://localhost:27017/catalog_db
-            database: catalog_db
+    mongodb:
+        host: localhost
+        port: 27017
+        database: catalog_db
+        username: root
+        password: example
 
   rabbitmq:
         addresses: localhost:5672
@@ -16,6 +19,11 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka.local:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /catalog/swagger-ui.html

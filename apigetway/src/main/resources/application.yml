@@ -3,28 +3,46 @@ server:
 
 spring:
   application:
-        name: GATEWAY-SERVICE
+        name: gateway-service
   main:
     web-application-type: reactive
   cloud:
     gateway:
       routes:
-        - id: auth-service-swagger
-          uri: lb://auth-service # Use the service name as registered in Eureka
+        - id: auth-service
+          uri: lb://auth-service
           predicates:
-            - Path=/**
+            - Path=/auth/**
+          filters:
+            - PrefixPath=/api
+            - AddRequestHeader=X-Powered-By, Spring Boot Gateway Service
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/cart/**
+          filters:
+            - PrefixPath=/api
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/payment/**
+          filters:
+            - PrefixPath=/api
 
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka.local:8761/eureka/
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-#logging:
-#    level:
-#        org.springframework.cloud.gateway: DEBUG
+  endpoint:
+    info:
+      enabled: true
+logging:
+    level:
+        org.springframework.cloud.gateway: DEBUG
