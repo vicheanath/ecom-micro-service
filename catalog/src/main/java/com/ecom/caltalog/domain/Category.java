@@ -23,6 +23,7 @@ public class Category {
     private String description;
 
     @DBRef(lazy = true)
+
     private List<Category> subCategories;
 
     @DBRef(lazy = true)
@@ -39,6 +40,15 @@ public class Category {
 
     public static Category create(String name, String description, Category parentCategory) {
         return new Category(name, description, parentCategory);
+    }
+
+    public void update(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public void updateParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
 }

@@ -31,13 +31,33 @@ spring:
             - Path=/auth/**
           filters:
             - PrefixPath=/api
-            - AddRequestHeader=X-Powered-By, Spring Boot Gateway Service
         - id: cart-service
           uri: lb://cart-service
           predicates:
             - Path=/cart/**
           filters:
             - PrefixPath=/api
+        - id: catalog-service
+          uri: lb://catalog-service
+          predicates:
+            - Path=/catalog/**
+          filters:
+            - PrefixPath=/api
+
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - PrefixPath=/api
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+              - Path=/order/**
+          filters:
+              - PrefixPath=/api
+
         - id: payment-service
           uri: lb://payment-service
           predicates:
