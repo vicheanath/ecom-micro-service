@@ -1,5 +1,65 @@
-version: "3.2"
+version: "3.9"
 services:
+
+#  gateway:
+#    image: ecommerce-apigetway:latest
+#    container_name: "gateway"
+#    ports:
+#      - 8081:8081
+#    networks:
+#      - rabbitmq
+#    depends_on:
+#      - service-discovery
+#      - mysqldb
+#  authentication:
+#    image: ecommerce-authentication:latest
+#    container_name: "authentication"
+#    networks:
+#      - rabbitmq
+#    depends_on:
+#      - service-discovery
+#      - mysqldb
+#  cart :
+#    image: ecommerce-cart:latest
+#    container_name: "cart"
+#    networks:
+#      - rabbitmq
+#
+#  catalog:
+#      image: ecommerce-catalog:latest
+#      container_name: "catalog"
+#      networks:
+#          - rabbitmq
+#      depends_on:
+#        - service-discovery
+#        - mongodb
+#
+#  order:
+#    image: ecommerce-order:latest
+#    container_name: "order"
+#    networks:
+#      - rabbitmq
+#    depends_on:
+#      - service-discovery
+#      - mysqldb
+#
+#  payment:
+#    image: ecommerce-payment:latest
+#    container_name: "payment"
+#    networks:
+#      - rabbitmq
+#    depends_on:
+#      - service-discovery
+#      - mysqldb
+#
+#  service-discovery:
+#    image: ecommerce-servicediscovery:latest
+#    container_name: "service-discovery"
+#    ports:
+#      - 8761:8761
+#    networks:
+#      - rabbitmq
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: "rabbitmq"
@@ -24,7 +84,7 @@ services:
       - --init-file
       - /docker-entrypoint-initdb.d/init.sql
     ports:
-      - 3386:3306
+      - "3386:3306"
     volumes:
       - ~/.docker-conf/mysql/data/:/var/lib/mysql
       - ~/.docker-conf/mysql/conf/:/etc/mysql/conf.d
@@ -42,39 +102,26 @@ services:
       PMA_USER: root
       PMA_PASSWORD: root
     ports:
-      - 8008:80
+      - "8008:80"
     networks:
       - rabbitmq
     restart: unless-stopped
 
   mongodb:
-    image: mongo
-    container_name: "mongodb"
-    restart: always
+    image: mongo:latest
+    container_name: mongodb
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: catalog_db
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ~/.docker-conf/mongodb/data:/data/db
     ports:
-      - 27017:27017
+      - "27017:27017"
     networks:
         - rabbitmq
-    volumes:
-      - ~/.docker-conf/mongodb/data:/data/db
 
-  mongo-express:
-      image: mongo-express
-      container_name: "mongo-express"
-      restart: always
-      ports:
-        - 8009:8081
-      environment:
-        ME_CONFIG_MONGODB_ADMINUSERNAME: root
-        ME_CONFIG_MONGODB_ADMINPASSWORD: example
-        ME_CONFIG_MONGODB_URL: mongodb://root:example@mongodb:27017/
-        ME_CONFIG_BASICAUTH: false
-      networks:
-        - rabbitmq
 
 networks:
     rabbitmq:
