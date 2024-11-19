@@ -16,7 +16,8 @@ spring:
 eureka:
     client:
       service-url:
-        defaultZone: http://eureka.local:8761/eureka/
+        defaultZone: http://localhost:8761/eureka/
+
     instance:
         prefer-ip-address: false
 management:
@@ -27,4 +28,4 @@ management:
 springdoc:
   swagger-ui:
     enabled: true
-    path: /user/swagger-ui.html
+    path: /auth/swagger-ui.html

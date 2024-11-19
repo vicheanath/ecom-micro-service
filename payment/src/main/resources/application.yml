@@ -2,7 +2,7 @@ spring:
   application:
         name: payment-service
   rabbitmq:
-    addresses: localhost:5672
+    addresses: localhost
     username: guest
     password: guest
   jpa:
@@ -24,6 +24,6 @@ springdoc:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka.local:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
