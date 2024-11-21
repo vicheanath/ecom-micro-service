@@ -1,6 +1,9 @@
 package com.ecom.authentication.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,12 +14,12 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 public class Role {
-    @Id
-    private UUID id;
-    private  String name;
-    private String permission;
     @ManyToMany(mappedBy = "roles")
     List<User> users;
+    @Id
+    private UUID id;
+    private String name;
+    private String permission;
 
     public Role(String name) {
         this.name = name;
@@ -25,6 +28,7 @@ public class Role {
     public String name() {
         return name;
     }
+
     @PrePersist
     public void prePersist() {
         if (id == null) {

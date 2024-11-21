@@ -6,14 +6,15 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.util.UUID;
+
 @Data
 public class GetCartByCustomerIdQuery implements Query<GetCartByCustomerIdResponseDto> {
 
-        @NotEmpty
-        @NotBlank
-        public UUID customerId;
+    @NotEmpty
+    @NotBlank
+    public UUID customerId;
 
-        public GetCartByCustomerIdQuery(UUID customerId) {
-            this.customerId = customerId;
-        }
+    public GetCartByCustomerIdQuery(UUID customerId) {
+        this.customerId = customerId;
+    }
 }

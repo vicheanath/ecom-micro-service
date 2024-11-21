@@ -12,4 +12,5 @@ public record GetAllPaymentTransactionQueryResponse(
         String status,
         String paymentMethod,
         String transactionId
-){}
+) {
+}

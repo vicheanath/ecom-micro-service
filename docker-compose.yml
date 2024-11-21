@@ -1,64 +1,64 @@
 version: "3.9"
 services:
 
-#  gateway:
-#    image: ecommerce-apigetway:latest
-#    container_name: "gateway"
-#    ports:
-#      - 8081:8081
-#    networks:
-#      - rabbitmq
-#    depends_on:
-#      - service-discovery
-#      - mysqldb
-#  authentication:
-#    image: ecommerce-authentication:latest
-#    container_name: "authentication"
-#    networks:
-#      - rabbitmq
-#    depends_on:
-#      - service-discovery
-#      - mysqldb
-#  cart :
-#    image: ecommerce-cart:latest
-#    container_name: "cart"
-#    networks:
-#      - rabbitmq
-#
-#  catalog:
-#      image: ecommerce-catalog:latest
-#      container_name: "catalog"
-#      networks:
-#          - rabbitmq
-#      depends_on:
-#        - service-discovery
-#        - mongodb
-#
-#  order:
-#    image: ecommerce-order:latest
-#    container_name: "order"
-#    networks:
-#      - rabbitmq
-#    depends_on:
-#      - service-discovery
-#      - mysqldb
-#
-#  payment:
-#    image: ecommerce-payment:latest
-#    container_name: "payment"
-#    networks:
-#      - rabbitmq
-#    depends_on:
-#      - service-discovery
-#      - mysqldb
-#
-#  service-discovery:
-#    image: ecommerce-servicediscovery:latest
-#    container_name: "service-discovery"
-#    ports:
-#      - 8761:8761
-#    networks:
-#      - rabbitmq
+  #  gateway:
+  #    image: ecommerce-apigetway:latest
+  #    container_name: "gateway"
+  #    ports:
+  #      - 8081:8081
+  #    networks:
+  #      - rabbitmq
+  #    depends_on:
+  #      - service-discovery
+  #      - mysqldb
+  #  authentication:
+  #    image: ecommerce-authentication:latest
+  #    container_name: "authentication"
+  #    networks:
+  #      - rabbitmq
+  #    depends_on:
+  #      - service-discovery
+  #      - mysqldb
+  #  cart :
+  #    image: ecommerce-cart:latest
+  #    container_name: "cart"
+  #    networks:
+  #      - rabbitmq
+  #
+  #  catalog:
+  #      image: ecommerce-catalog:latest
+  #      container_name: "catalog"
+  #      networks:
+  #          - rabbitmq
+  #      depends_on:
+  #        - service-discovery
+  #        - mongodb
+  #
+  #  order:
+  #    image: ecommerce-order:latest
+  #    container_name: "order"
+  #    networks:
+  #      - rabbitmq
+  #    depends_on:
+  #      - service-discovery
+  #      - mysqldb
+  #
+  #  payment:
+  #    image: ecommerce-payment:latest
+  #    container_name: "payment"
+  #    networks:
+  #      - rabbitmq
+  #    depends_on:
+  #      - service-discovery
+  #      - mysqldb
+  #
+  #  service-discovery:
+  #    image: ecommerce-servicediscovery:latest
+  #    container_name: "service-discovery"
+  #    ports:
+  #      - 8761:8761
+  #    networks:
+  #      - rabbitmq
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -118,7 +118,7 @@ services:
     ports:
       - "27017:27017"
     networks:
-        - rabbitmq
+      - rabbitmq
 
   keycloak:
     image: quay.io/keycloak/keycloak:latest
@@ -141,21 +141,21 @@ services:
       - rabbitmq
 
   postgres:
-      image: postgres:13
-      environment:
-        - POSTGRES_DB=keycloak
-        - POSTGRES_USER=keycloak
-        - POSTGRES_PASSWORD=password
-      ports:
-        - "5436:5432"
-      volumes:
-        - postgres-data:/var/lib/postgresql/data
-      networks:
-        - rabbitmq
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - rabbitmq
 
 volumes:
-    postgres-data:
+  postgres-data:
 
 networks:
-    rabbitmq:
-        driver: bridge
+  rabbitmq:
+    driver: bridge

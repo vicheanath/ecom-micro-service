@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class JWTGenerator {
-    private String secret = "yourBase64EncodedSecretKey";
     Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private String secret = "yourBase64EncodedSecretKey";
 
     public String generateToken(String username, List<Role> roles) {
         // Extract role names or IDs

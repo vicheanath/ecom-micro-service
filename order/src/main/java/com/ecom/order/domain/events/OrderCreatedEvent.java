@@ -19,5 +19,4 @@ public class OrderCreatedEvent extends BaseDomainEvent {
     private final OrderStatus status;
 
 
-
 }

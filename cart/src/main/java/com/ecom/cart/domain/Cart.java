@@ -63,6 +63,6 @@ public class Cart extends AggregateRoot<UUID> {
 
 
     public void checkout() {
-        addDomainEvent(new CartCheckedOutEvent(userId, id , items));
+        addDomainEvent(new CartCheckedOutEvent(userId, id, items));
     }
 }

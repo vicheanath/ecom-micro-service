@@ -29,10 +29,9 @@ public class PaymentController {
     }
 
     @PostMapping("/refund")
-    public void refundPayment( @RequestBody RefundPaymentCommand command) {
+    public void refundPayment(@RequestBody RefundPaymentCommand command) {
         mediator.send(command);
     }
-
 
 
 }

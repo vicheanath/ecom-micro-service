@@ -6,5 +6,6 @@ public record GetCartByCustomerIdResponseDto(
         UUID id,
         UUID customerId,
         CartItemDo[] cartItems
-){}
+) {
+}
 

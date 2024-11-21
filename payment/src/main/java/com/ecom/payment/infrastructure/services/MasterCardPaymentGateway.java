@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class MasterCardPaymentGateway implements PaymentGateway{
+public class MasterCardPaymentGateway implements PaymentGateway {
     @Override
     public String processPayment(Money money, String paymentId) {
 
@@ -17,7 +17,7 @@ public class MasterCardPaymentGateway implements PaymentGateway{
 
     @Override
     public String refundPayment(String paymentId) {
-        System.out.println("Refunding MasterCard payment with payment id " + paymentId );
+        System.out.println("Refunding MasterCard payment with payment id " + paymentId);
         return UUID.randomUUID().toString();
     }
 }

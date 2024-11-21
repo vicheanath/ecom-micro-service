@@ -9,10 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.ecom.inventory", "com.ecom.shared"})
 @EnableDiscoveryClient
-public class InventoryApplication
-{
-    public static void main( String[] args )
-    {
+public class InventoryApplication {
+    public static void main(String[] args) {
         SpringApplication.run(InventoryApplication.class, args);
     }
 }

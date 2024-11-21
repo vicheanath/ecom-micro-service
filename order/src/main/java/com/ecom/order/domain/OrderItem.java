@@ -26,7 +26,7 @@ public class OrderItem extends ValueObject {
     public OrderItem() {
     }
 
-    public OrderItem( int quantity, float price, UUID productId) {
+    public OrderItem(int quantity, float price, UUID productId) {
 
         this.quantity = quantity;
         this.price = price;

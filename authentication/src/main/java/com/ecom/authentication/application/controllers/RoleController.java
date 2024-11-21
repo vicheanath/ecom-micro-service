@@ -16,6 +16,7 @@ public class RoleController {
     public RoleController(Mediator mediator) {
         this.mediator = mediator;
     }
+
     @PostMapping("/create")
     public BaseReponse<String> createRole(@RequestBody CreateNewRoleCommand command) {
         mediator.send(command);

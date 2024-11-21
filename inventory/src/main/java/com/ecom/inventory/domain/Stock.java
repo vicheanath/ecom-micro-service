@@ -1,7 +1,5 @@
 package com.ecom.inventory.domain;
 
-import com.ecom.inventory.domain.events.StockItemEvent;
-import com.ecom.inventory.domain.events.StockReservedEvent;
 import com.ecom.inventory.domain.events.StockUpdatedEvent;
 import com.ecom.inventory.infrastructure.JpaDomainEventInterceptor;
 import com.ecom.shared.domain.AggregateRoot;
@@ -10,6 +8,7 @@ import lombok.Getter;
 
 import java.util.List;
 import java.util.UUID;
+
 @Getter
 @Entity
 @EntityListeners(JpaDomainEventInterceptor.class)
@@ -34,7 +33,7 @@ public class Stock extends AggregateRoot<UUID> {
         this.reservedStock = reservedStock;
     }
 
-    public  static Stock create(UUID id, UUID productId, int availableStock, int reservedStock) {
+    public static Stock create(UUID id, UUID productId, int availableStock, int reservedStock) {
         return new Stock(id, productId, availableStock, reservedStock);
     }
 

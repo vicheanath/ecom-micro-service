@@ -5,12 +5,11 @@ import com.ecom.authentication.domain.repositories.RoleRepository;
 import com.ecom.authentication.domain.repositories.UserRepository;
 import com.ecom.authentication.infrastructure.JpaDomainEventInterceptor;
 import com.ecom.shared.application.CommandHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCommand,Void> {
+public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCommand, Void> {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -24,6 +23,7 @@ public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCo
         this.roleRepository = roleRepository;
         this.jpaDomainEventInterceptor = jpaDomainEventInterceptor;
     }
+
     @Override
     public Void handle(UserRegisterCommand command) {
         var user = userRepository.findByUsername(command.getUsername());
@@ -46,7 +46,6 @@ public class UserRegisterCommandHandler implements CommandHandler<UserRegisterCo
         userRepository.save(newUser);
         return null;
     }
-
 
 
 }

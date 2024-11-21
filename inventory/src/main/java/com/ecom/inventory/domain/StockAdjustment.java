@@ -10,11 +10,11 @@ import java.util.UUID;
 @Entity
 @Getter
 public class StockAdjustment extends ValueObject {
+    @ManyToOne
+    public Stock inventory;
     @Id
     @GeneratedValue
     private UUID id;
-    @ManyToOne
-    public Stock inventory;
     private int quantity;
     @Enumerated(EnumType.STRING)
     private StockAdjustmentReason reason;
