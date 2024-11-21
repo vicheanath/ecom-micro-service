@@ -1,5 +1,8 @@
 package com.ecom.payment.domain;
 
+import com.ecom.payment.domain.events.PaymentCompletedEvent;
+import com.ecom.payment.domain.events.PaymentFailedEvent;
+import com.ecom.payment.domain.events.PaymentInitiatedEvent;
 import com.ecom.shared.domain.AggregateRoot;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -41,36 +44,28 @@ public class Payment extends AggregateRoot<UUID> {
         this.userId = userId;
         this.amount = amount;
         this.createdAt = LocalDateTime.now();
-        this.status =PaymentStatus.PENDING;
+        this.status = PaymentStatus.PENDING;
     }
 
     public static Payment create(UUID id, UUID orderId, UUID userId, Money amount) {
-        return new Payment(id, orderId, userId, amount);
+        var payment = new Payment(id, orderId, userId, amount);
+        payment.addDomainEvent(new PaymentInitiatedEvent(id, orderId, userId, amount.getAmount(), String.valueOf(payment.getStatus())));
+        return payment;
     }
 
     public void complete(String transactionId, PaymetMethodEnum paymentMethod) {
         this.transactionId = transactionId;
         this.paymentMethod = paymentMethod;
         this.status = PaymentStatus.COMPLETED;
+        addDomainEvent(new PaymentCompletedEvent(this.id, this.orderId, String.valueOf(this.status)));
     }
 
     public void refund() {
         this.status = PaymentStatus.REFUNDED;
     }
 
-    public void cancel() {
-        this.status = PaymentStatus.COMPLETED;
-    }
-
     public void transactionFailed() {
         this.status = PaymentStatus.FAILED;
-    }
-
-    public boolean isCompleted() {
-        return this.status == PaymentStatus.COMPLETED;
-    }
-
-    public void complete(String transactionId, com.ecom.payment.application.processpayment.PaymetMethodEnum paymetMethodEnum) {
-
+        addDomainEvent(new PaymentFailedEvent(this.id, this.orderId, String.valueOf(this.status)));
     }
 }

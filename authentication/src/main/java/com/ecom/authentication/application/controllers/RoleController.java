@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("api/role")
 public class RoleController {
     private Mediator mediator;
 
     public RoleController(Mediator mediator) {
         this.mediator = mediator;
     }
+
     @PostMapping("/create")
     public BaseReponse<String> createRole(@RequestBody CreateNewRoleCommand command) {
         mediator.send(command);

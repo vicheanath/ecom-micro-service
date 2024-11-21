@@ -8,16 +8,15 @@ import lombok.Data;
 
 @Data
 public class CreateProductCommand implements Command<Void> {
-
     @NotEmpty
     @NotBlank
     @Max(100)
-    public  String name;
+    public String name;
     @Max(500)
-    public  String description;
+    public String description;
     @NotEmpty
-    public  String categoryId;
-
-    public  double price;
-    public  String imageUrl;
+    public String categoryId;
+    public double price;
+    public int quantity;
+    public String imageUrl;
 }

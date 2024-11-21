@@ -1,20 +1,20 @@
+server:
+  port: 8086
 spring:
   application:
-        name: cart-service
+    name: inventory-service
   rabbitmq:
     addresses: localhost
     username: guest
     password: guest
   jpa:
     hibernate:
-        ddl-auto: update
+      ddl-auto: update
     show-sql: true
   datasource:
-        url: jdbc:mysql://localhost:3386/db_inventory
-        username: user_db_inventory
-        password: password_user_db_inventory
-server:
-    port: 8086
+    url: jdbc:mysql://localhost:3386/db_inventory
+    username: user_db_inventory
+    password: password_user_db_inventory
 
 eureka:
   client:
@@ -26,4 +26,4 @@ eureka:
 springdoc:
   swagger-ui:
     enabled: true
-    path: /cart/swagger-ui.html
+    path: /inventory/swagger-ui.html

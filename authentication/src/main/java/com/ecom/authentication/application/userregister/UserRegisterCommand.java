@@ -5,7 +5,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -15,10 +18,10 @@ import java.util.UUID;
 @Setter
 public class UserRegisterCommand implements Command<Void> {
     @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 20,message = "Username must be between 3 and 20 characters")
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     private String username;
     @NotNull
-    @Size(min = 6, max = 20,message = "Password must be between 6 and 20 characters")
+    @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
     private String password;
     @Email(message = "Email is not valid")
     private String email;

@@ -1,20 +1,20 @@
 spring:
   application:
-        name: order-service
+    name: order-service
   rabbitmq:
     addresses: localhost
     username: guest
     password: guest
   jpa:
     hibernate:
-        ddl-auto: update
+      ddl-auto: update
     show-sql: true
   datasource:
-        url: jdbc:mysql://localhost:3386/db_order
-        username: user_db_order
-        password: password_user_db_order
+    url: jdbc:mysql://localhost:3386/db_order
+    username: user_db_order
+    password: password_user_db_order
 server:
-    port: 8086
+  port: 8086
 
 eureka:
   client:

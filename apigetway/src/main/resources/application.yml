@@ -26,6 +26,22 @@ spring:
 #          jwt:
 #            issuer-uri: http://localhost:8080/realms/ecomerce
 #            jwk-set-uri: http://localhost:8080/realms/ecomerce/protocol/openid-connect/certs
+  #  security:
+  #    oauth2:
+  #      resourceserver:
+  #        jwt:
+  #          issuer-uri: http://localhost:8080/realms/ecomerce
+  #      client:
+  #        registration:
+  #          keycloak:
+  #            client-id: ecommerce
+  #            client-secret: Lg6uFtBnA4Hqg2MHt0HQ478gXVJbOIFp
+  #            authorization-grant-type: client_credentials
+  #            scope: openid
+  #            provider: keycloak
+  #        provider:
+  #          keycloak:
+  #            issuer-uri: http://localhost:8080/realms/ecomerce
   main:
     web-application-type: reactive
   cloud:
@@ -60,9 +76,9 @@ spring:
         - id: order-service
           uri: lb://order-service
           predicates:
-              - Path=/order/**
+            - Path=/order/**
           filters:
-              - PrefixPath=/api
+            - PrefixPath=/api
 
         - id: payment-service
           uri: lb://payment-service
@@ -85,6 +101,6 @@ management:
     info:
       enabled: true
 logging:
-    level:
-        org.springframework.cloud.gateway: DEBUG
-        org.springframework.security: DEBUG
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG

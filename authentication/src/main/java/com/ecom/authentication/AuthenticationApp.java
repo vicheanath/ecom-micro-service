@@ -10,11 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @ComponentScan(basePackages = {"com.ecom.authentication", "com.ecom.shared"})
 @EnableWebSecurity
 @EnableDiscoveryClient
-public class AuthenticationApp
-{
-    public static void main( String[] args )
-    {
-
+public class AuthenticationApp {
+    public static void main(String[] args) {
         SpringApplication.run(AuthenticationApp.class, args);
     }
 

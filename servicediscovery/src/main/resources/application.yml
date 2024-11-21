@@ -10,9 +10,9 @@ eureka:
     appname: EurekaCluster
   environment: local
   client:
-#    serviceUrl:
-#      defaultZone: http://eurekaserver1:8762/eureka/
-#    register-with-eureka: true
-#    fetch-registry: true
+    #    serviceUrl:
+    #      defaultZone: http://eurekaserver1:8762/eureka/
+    #    register-with-eureka: true
+    #    fetch-registry: true
     register-with-eureka: false
     fetch-registry: false

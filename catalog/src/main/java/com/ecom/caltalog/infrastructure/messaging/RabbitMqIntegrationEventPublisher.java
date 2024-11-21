@@ -15,6 +15,5 @@ public class RabbitMqIntegrationEventPublisher {
 
     public void publish(String exchange, String routingKey, IntegrationEvent event) {
         amqpTemplate.convertAndSend(exchange, routingKey, event);
-        System.out.println("Published integration event: " + event.getClass().getSimpleName());
     }
 }

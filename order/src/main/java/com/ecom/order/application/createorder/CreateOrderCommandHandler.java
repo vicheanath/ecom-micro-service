@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class CreateOrderCommandHandler implements CommandHandler<CreateOrderCommand,Void> {
+public class CreateOrderCommandHandler implements CommandHandler<CreateOrderCommand, Void> {
 
-    private  OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
     public CreateOrderCommandHandler(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;

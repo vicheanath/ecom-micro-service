@@ -3,7 +3,7 @@ package com.integration;
 import lombok.Data;
 
 @Data
-public class UserRegisterIntegrationEvent extends IntegrationEvent{
+public class UserRegisterIntegrationEvent extends IntegrationEvent {
     private String userId;
     private String username;
     private String email;

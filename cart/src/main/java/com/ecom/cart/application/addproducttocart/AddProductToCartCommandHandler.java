@@ -12,7 +12,7 @@ import java.util.UUID;
 
 
 @Service
-public class AddProductToCartCommandHandler implements CommandHandler<AddProductToCardCommand,Void> {
+public class AddProductToCartCommandHandler implements CommandHandler<AddProductToCardCommand, Void> {
 
     @Autowired
     private final CartRepository cartRepository;
@@ -28,13 +28,13 @@ public class AddProductToCartCommandHandler implements CommandHandler<AddProduct
     public Void handle(AddProductToCardCommand command) {
         var cart = ifCartNotExistCreate(command.getCartId(), command.getCustomerId());
         var product = productRepository.findById(command.getProductId()).orElseThrow(() -> new RuntimeException("Product not found"));
-        var cartItem = CartItem.create(command.getQuantity() , product.getPrice(),product);
+        var cartItem = CartItem.create(command.getQuantity(), product.getPrice(), product);
         cart.addCartItem(cartItem);
         cartRepository.save(cart);
         return null;
     }
 
-    private Cart ifCartNotExistCreate(UUID cartId , UUID customerId){
+    private Cart ifCartNotExistCreate(UUID cartId, UUID customerId) {
         return cartRepository.findById(cartId).orElseGet(() -> {
             var cart = Cart.create(cartId, customerId);
             cartRepository.save(cart);

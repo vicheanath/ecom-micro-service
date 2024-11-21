@@ -12,22 +12,21 @@ import java.util.UUID;
 
 @Service
 public class ProcessPaymentCommandHandler implements CommandHandler<ProcessPaymentCommand, Void> {
-    
+
     private final MasterCardPaymentGateway masterCardPaymentGateway;
     private final PaymentRepository paymentRepository;
     private final PaypalPaymentGateway paypalPaymentGateway;
-    
-    
-    
+
+
     public ProcessPaymentCommandHandler(MasterCardPaymentGateway masterCardPaymentGateway, PaymentRepository paymentRepository, PaypalPaymentGateway paypalPaymentGateway) {
         this.masterCardPaymentGateway = masterCardPaymentGateway;
         this.paymentRepository = paymentRepository;
         this.paypalPaymentGateway = paypalPaymentGateway;
     }
-    
+
     @Override
     public Void handle(ProcessPaymentCommand command) {
-        
+
         var amount = Money.create(command.getAmount(), "USD");
         var payment = Payment.create(UUID.randomUUID(), command.getOrderId(), command.getUserId(), amount);
         processPaymentSuccessOrFailed(command, payment);

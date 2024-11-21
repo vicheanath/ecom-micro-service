@@ -4,12 +4,11 @@ import com.ecom.authentication.domain.event.UserRegisterEvent;
 import com.ecom.order.infrastructure.JpaDomainEventInterceptor;
 import com.ecom.shared.domain.AggregateRoot;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 
 
 @Getter
@@ -36,16 +35,11 @@ public class User extends AggregateRoot<UUID> {
     public User() {
     }
 
-    private User( UUID id, String username, String password, String email) {
+    private User(UUID id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-    }
-
-
-    public void addRole(Role role) {
-        roles.add(role);
     }
 
     public static User create(String username, String password, String email, Role role) {
@@ -54,6 +48,10 @@ public class User extends AggregateRoot<UUID> {
         user.addDomainEvent(new UserRegisterEvent(user.id, user.username, user.email, role.getId())
         );
         return user;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 }
 

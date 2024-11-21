@@ -21,9 +21,9 @@ public class GetOrderQueryHandler implements QueryHandler<GetOrderQuery, List<Ge
     public List<GetOrderQueryResponse> handle(GetOrderQuery query) {
         return repository.findAll().stream()
                 .map(order -> new GetOrderQueryResponse(
-                order.getId().toString(),
-                order.getStatus(),
-                order.getTotalPrice() ))
+                        order.getId().toString(),
+                        String.valueOf(order.getStatus()),
+                        order.getTotalPrice()))
                 .collect(toList());
     }
 }
