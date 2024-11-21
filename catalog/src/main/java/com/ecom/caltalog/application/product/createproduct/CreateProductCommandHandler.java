@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class CreateProductCommandHandler implements CommandHandler<CreateProductCommand,Void> {
+public class CreateProductCommandHandler implements CommandHandler<CreateProductCommand, Void> {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final JpaDomainEventInterceptor jpaDomainEventInterceptor;
 
-    public CreateProductCommandHandler(ProductRepository productRepository, CategoryRepository categoryRepository , JpaDomainEventInterceptor jpaDomainEventInterceptor) {
+    public CreateProductCommandHandler(ProductRepository productRepository, CategoryRepository categoryRepository, JpaDomainEventInterceptor jpaDomainEventInterceptor) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.jpaDomainEventInterceptor = jpaDomainEventInterceptor;
@@ -29,7 +29,14 @@ public class CreateProductCommandHandler implements CommandHandler<CreateProduct
         Category category = categoryRepository.findById(command.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        Product product = Product.create(UUID.randomUUID().toString(),command.getName(), command.getDescription(), command.getPrice(), command.getImageUrl()  , category);
+        Product product = Product.create(
+                UUID.randomUUID().toString(),
+                command.getName(),
+                command.getDescription(),
+                command.getQuantity(),
+                command.getPrice(),
+                command.getImageUrl(),
+                category);
 
         productRepository.save(product);
         jpaDomainEventInterceptor.publishEvents(product);

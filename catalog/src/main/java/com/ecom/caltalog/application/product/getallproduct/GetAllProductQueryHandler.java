@@ -11,14 +11,12 @@ public class GetAllProductQueryHandler implements QueryHandler<GetAllProductQuer
 
     private final ProductRepository productRepository;
 
-    public GetAllProductQueryHandler(ProductRepository productRepository ) {
+    public GetAllProductQueryHandler(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
     public List<GetAllProductDto> handle(GetAllProductQuery query) {
-
-
 
 
         var products = productRepository.findAll();

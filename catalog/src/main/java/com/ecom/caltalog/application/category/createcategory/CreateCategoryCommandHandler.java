@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class CreateCategoryCommandHandler implements CommandHandler<CreateCategoryCommand,Void> {
+public class CreateCategoryCommandHandler implements CommandHandler<CreateCategoryCommand, Void> {
 
     private final CategoryRepository categoryRepository;
 
@@ -26,13 +26,13 @@ public class CreateCategoryCommandHandler implements CommandHandler<CreateCatego
             parent = getParentCategory(command);
         }
 
-        Category category = Category.create(UUID.randomUUID().toString(),command.getName(), command.getDescription(), parent);
+        Category category = Category.create(UUID.randomUUID().toString(), command.getName(), command.getDescription(), parent);
         categoryRepository.save(category);
         return null;
     }
 
     private boolean checkIfCommandIsValidByName(CreateCategoryCommand command) {
-       return categoryRepository.findByName(command.getName()).isPresent();
+        return categoryRepository.findByName(command.getName()).isPresent();
     }
 
     private Category getParentCategory(CreateCategoryCommand command) {

@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.util.UUID;
-
 @Data
 public class UpdateCategoryCommand implements Command<Void> {
 

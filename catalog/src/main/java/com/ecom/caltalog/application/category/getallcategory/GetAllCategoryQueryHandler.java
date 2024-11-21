@@ -18,12 +18,12 @@ public class GetAllCategoryQueryHandler implements QueryHandler<GetAllCategoryQu
     @Override
     public List<GetAllCategoryDto> handle(GetAllCategoryQuery query) {
         return repository.findAll().stream()
-            .map(category -> new GetAllCategoryDto(
-                category.getId(),
-                category.getName(),
-                category.getDescription()
-            ))
-            .toList();
+                .map(category -> new GetAllCategoryDto(
+                        category.getId(),
+                        category.getName(),
+                        category.getDescription()
+                ))
+                .toList();
     }
 }
 

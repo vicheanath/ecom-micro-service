@@ -1,5 +1,8 @@
 package com.ecom.inventory.domain;
 
+import com.ecom.inventory.domain.events.StockItemEvent;
+import com.ecom.inventory.domain.events.StockReservedEvent;
+import com.ecom.inventory.domain.events.StockUpdatedEvent;
 import com.ecom.inventory.infrastructure.JpaDomainEventInterceptor;
 import com.ecom.shared.domain.AggregateRoot;
 import jakarta.persistence.*;
@@ -10,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @EntityListeners(JpaDomainEventInterceptor.class)
-public class Inventory extends AggregateRoot<UUID> {
+public class Stock extends AggregateRoot<UUID> {
     @Id
     @GeneratedValue
     private UUID id;
@@ -21,23 +24,24 @@ public class Inventory extends AggregateRoot<UUID> {
     @JoinColumn(name = "inventory_id")
     private List<StockAdjustment> stockAdjustments;
 
-    public Inventory() {
+    public Stock() {
     }
 
-    public Inventory(UUID id, UUID productId, int availableStock, int reservedStock) {
+    public Stock(UUID id, UUID productId, int availableStock, int reservedStock) {
         this.id = id;
         this.productId = productId;
         this.availableStock = availableStock;
         this.reservedStock = reservedStock;
     }
 
-    public  static Inventory create(UUID id, UUID productId, int availableStock, int reservedStock) {
-        return new Inventory(id, productId, availableStock, reservedStock);
+    public  static Stock create(UUID id, UUID productId, int availableStock, int reservedStock) {
+        return new Stock(id, productId, availableStock, reservedStock);
     }
 
     public void adjustStock(StockAdjustment stockAdjustment) {
         stockAdjustments.add(stockAdjustment);
         availableStock += stockAdjustment.getQuantity();
+        addDomainEvent(new StockUpdatedEvent(id.toString(), stockAdjustment.getQuantity()));
     }
 
     public void reserveStock(int quantity) {

@@ -22,7 +22,7 @@ public class GetOrderQueryHandler implements QueryHandler<GetOrderQuery, List<Ge
         return repository.findAll().stream()
                 .map(order -> new GetOrderQueryResponse(
                 order.getId().toString(),
-                order.getStatus(),
+                String.valueOf(order.getStatus()),
                 order.getTotalPrice() ))
                 .collect(toList());
     }

@@ -21,7 +21,7 @@ public class GetCartByCustomerIdQueryHandler implements QueryHandler<GetCartByCu
 
         return new GetCartByCustomerIdResponseDto(
                 cart.getId(),
-                cart.getCustomerId(),
+                cart.getUserId(),
                 cart.getItems().stream()
                         .map(cartItem -> new CartItemDo(
                                 cartItem.getId(),

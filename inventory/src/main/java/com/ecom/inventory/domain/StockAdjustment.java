@@ -14,7 +14,7 @@ public class StockAdjustment extends ValueObject {
     @GeneratedValue
     private UUID id;
     @ManyToOne
-    public Inventory inventory;
+    public Stock inventory;
     private int quantity;
     @Enumerated(EnumType.STRING)
     private StockAdjustmentReason reason;

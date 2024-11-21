@@ -11,7 +11,6 @@ import com.ecom.shared.infrastructure.Mediator;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/product")
@@ -33,22 +32,20 @@ public class ProductController {
         return mediator.ask(new GetProductByIdQuery(id));
     }
 
-     @PostMapping
+    @PostMapping
     public void create(@RequestBody CreateProductCommand command) {
-         mediator.send(command);
-     }
+        mediator.send(command);
+    }
 
-        @PutMapping
+    @PutMapping
     public void update(@RequestBody UpdateProductCommand command) {
-            mediator.send(command);
-        }
+        mediator.send(command);
+    }
 
-        @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
-            mediator.send(new DeleteProductByIdCommand(id));
-        }
-
-
+        mediator.send(new DeleteProductByIdCommand(id));
+    }
 
 
 }

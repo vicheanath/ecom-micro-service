@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class JpaDomainEventInterceptor {
 
-    @Autowired
     private static ApplicationEventPublisher eventPublisher;
+
+    public JpaDomainEventInterceptor(ApplicationEventPublisher eventPublisher) {
+        JpaDomainEventInterceptor.eventPublisher = eventPublisher;
+    }
 
     @PostPersist
     @PostUpdate
