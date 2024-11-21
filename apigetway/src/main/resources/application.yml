@@ -6,6 +6,28 @@ spring:
     name: gateway-service
   #  security:
   #    oauth2:
+  #      client:
+  #        registration:
+  #          keycloak:
+  #            client-id: ecommerce
+  #            client-secret: Lg6uFtBnA4Hqg2MHt0HQ478gXVJbOIFp
+  #            authorization-grant-type: client_credentials
+  #            redirect-uri: http://localhost:8081/auth/
+  #            scope: openid
+  #        provider:
+  #          keycloak:
+  #            authorization-uri: http://localhost:8080/realms/ecomerce/protocol/openid-connect/auth
+  #            token-uri: http://localhost:8080/realms/ecomerce/protocol/openid-connect/token
+  #            user-info-uri: http://localhost:8080/realms/ecomerce/protocol/openid-connect/userinfo
+  #            jwk-set-uri: http://localhost:8080/realms/ecomerce/protocol/openid-connect/certs
+  #    security:
+  #      oauth2:
+  #        resourceserver:
+  #          jwt:
+  #            issuer-uri: http://localhost:8080/realms/ecomerce
+  #            jwk-set-uri: http://localhost:8080/realms/ecomerce/protocol/openid-connect/certs
+  #  security:
+  #    oauth2:
   #      resourceserver:
   #        jwt:
   #          issuer-uri: http://localhost:8080/realms/ecomerce
