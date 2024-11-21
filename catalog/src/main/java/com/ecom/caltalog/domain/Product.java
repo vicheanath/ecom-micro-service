@@ -11,6 +11,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.UUID;
+
 
 @Getter
 @Document(collection = "products")
@@ -31,7 +33,8 @@ public class Product extends AggregateRoot<String> {
     @DBRef
     private Category category;
 
-    public Product(String name, String description, double price, String imageUrl, Category category) {
+    private Product(String id, String name, String description, double price, String imageUrl, Category category) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -39,8 +42,8 @@ public class Product extends AggregateRoot<String> {
         this.category = category;
     }
 
-    public static Product create(String name, String description, double price, String imageUrl , Category category) {
-        var product = new Product(name, description, price, imageUrl, category);
+    public static Product create(String id, String name, String description, double price, String imageUrl , Category category) {
+        var product = new Product(id,name, description, price, imageUrl, category);
         product.addDomainEvent(new ProductCreatedEvent(product.getId(), name, price, imageUrl, category.getId()));
         return product;
     }

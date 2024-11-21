@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class CreateProductCommand implements Command<Void> {
 
@@ -16,7 +18,7 @@ public class CreateProductCommand implements Command<Void> {
     @Max(500)
     public  String description;
     @NotEmpty
-    public  String categoryId;
+    public String categoryId;
 
     public  double price;
     public  String imageUrl;

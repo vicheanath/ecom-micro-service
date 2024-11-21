@@ -1,6 +1,7 @@
 package com.ecom.caltalog.application.product.createproduct;
 
 import com.ecom.caltalog.domain.events.ProductCreatedEvent;
+import com.ecom.caltalog.infrastructure.RabbitMqConfig;
 import com.ecom.caltalog.infrastructure.messaging.RabbitMqIntegrationEventPublisher;
 import com.integration.ProductCreatedIntegrationEvent;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,7 @@ public class CreateProductEventHandler {
     public void handle(ProductCreatedEvent event) {
 
         ProductCreatedIntegrationEvent integrationEvent = map(event);
-        eventPublisher.publish("product", "product.created", integrationEvent);
-        System.out.println("Published integration event: " + integrationEvent.getClass().getSimpleName());
+        eventPublisher.publish(RabbitMqConfig.EXCHANGE,RabbitMqConfig.ROUTING_KEY, integrationEvent);
 
     }
 

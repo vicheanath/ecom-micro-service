@@ -33,8 +33,4 @@ public class AuthenticationController {
         }
         return ResponseEntity.badRequest().build();
     }
-    @GetMapping("/")
-    public String home() {
-        return "Hello from Authentication Service";
-    }
 }

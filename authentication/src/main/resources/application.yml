@@ -3,11 +3,6 @@ server:
 spring:
   application:
         name: auth-service
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8080/realms/ecomerce
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,7 +10,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
     url: jdbc:mysql://localhost:3386/db_user
-    driver-class-name: com.mysql.cj.jdbc.Driver
     username: user_db_user
     password: password_user_db_user
 eureka:

@@ -8,6 +8,8 @@ import com.ecom.caltalog.infrastructure.repositories.ProductRepository;
 import com.ecom.shared.application.CommandHandler;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class CreateProductCommandHandler implements CommandHandler<CreateProductCommand,Void> {
 
@@ -27,7 +29,7 @@ public class CreateProductCommandHandler implements CommandHandler<CreateProduct
         Category category = categoryRepository.findById(command.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        Product product = Product.create(command.getName(), command.getDescription(), command.getPrice(), command.getImageUrl()  , category);
+        Product product = Product.create(UUID.randomUUID().toString(),command.getName(), command.getDescription(), command.getPrice(), command.getImageUrl()  , category);
 
         productRepository.save(product);
         jpaDomainEventInterceptor.publishEvents(product);

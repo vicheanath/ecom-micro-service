@@ -11,6 +11,7 @@ import com.ecom.shared.infrastructure.Mediator;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/product")
