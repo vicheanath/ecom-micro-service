@@ -7,7 +7,7 @@ import com.ecom.shared.application.CommandHandler;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateProductCommandHandler implements CommandHandler<UpdateProductCommand,Void> {
+public class UpdateProductCommandHandler implements CommandHandler<UpdateProductCommand, Void> {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
@@ -23,7 +23,7 @@ public class UpdateProductCommandHandler implements CommandHandler<UpdateProduct
                 .ifPresent(product -> {
                     Category category = categoryRepository.findById(command.getCategoryId())
                             .orElseThrow(() -> new RuntimeException("Category not found"));
-                    product.update(command.getName(), command.getDescription(), command.getPrice(), command.getImageUrl() , category);
+                    product.update(command.getName(), command.getDescription(), command.getPrice(), command.getImageUrl(), category);
                     productRepository.save(product);
                 });
         return null;

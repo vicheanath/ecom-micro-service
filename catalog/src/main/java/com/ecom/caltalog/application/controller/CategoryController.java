@@ -21,13 +21,13 @@ public class CategoryController {
 
     @GetMapping
     public List<GetAllCategoryDto> getAllCategory() {
-       return   mediator.ask(new GetAllCategoryQuery());
+        return mediator.ask(new GetAllCategoryQuery());
     }
 
     @PostMapping
-    public void createCategory( @RequestBody CreateCategoryCommand command) {
+    public void createCategory(@RequestBody CreateCategoryCommand command) {
         mediator.send(command);
-     }
+    }
 
     @PutMapping
     public void updateCategory(@RequestBody UpdateCategoryCommand command) {

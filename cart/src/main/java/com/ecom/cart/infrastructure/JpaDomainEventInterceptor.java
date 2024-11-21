@@ -14,7 +14,7 @@ public class JpaDomainEventInterceptor {
     private static ApplicationEventPublisher eventPublisher;
 
     public JpaDomainEventInterceptor(ApplicationEventPublisher eventPublisher) {
-        this.eventPublisher = eventPublisher;
+        JpaDomainEventInterceptor.eventPublisher = eventPublisher;
     }
 
     @PostPersist

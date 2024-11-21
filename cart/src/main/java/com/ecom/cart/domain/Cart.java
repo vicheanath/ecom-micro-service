@@ -1,5 +1,6 @@
 package com.ecom.cart.domain;
 
+import com.ecom.cart.domain.events.CartCheckedOutEvent;
 import com.ecom.cart.domain.events.CartItemAddedEvent;
 import com.ecom.cart.infrastructure.JpaDomainEventInterceptor;
 import com.ecom.shared.domain.AggregateRoot;
@@ -17,7 +18,7 @@ public class Cart extends AggregateRoot<UUID> {
 
     @Id
     private UUID id;
-    private UUID customerId;
+    private UUID userId;
     @OneToMany
     @JoinColumn(name = "cart_id")
     private List<CartItem> items;
@@ -26,14 +27,14 @@ public class Cart extends AggregateRoot<UUID> {
     public Cart() {
     }
 
-    public Cart(UUID id, UUID customerId) {
+    public Cart(UUID id, UUID userId) {
         this.id = id;
-        this.customerId = customerId;
+        this.userId = userId;
         this.items = new ArrayList<>();
     }
 
-    public static Cart create(UUID id, UUID customerId) {
-        return new Cart(id, customerId);
+    public static Cart create(UUID id, UUID userId) {
+        return new Cart(id, userId);
     }
 
     public void addCartItem(CartItem item) {
@@ -45,7 +46,7 @@ public class Cart extends AggregateRoot<UUID> {
         } else {
             this.items.add(item);
         }
-        this.addDomainEvent(new CartItemAddedEvent(item.getId(), item.getProduct().getId(), item.getQuantity(), item.getPrice()));
+        this.addDomainEvent(new CartItemAddedEvent(userId, item.getProduct().getId(), item.getQuantity()));
     }
 
     public void removeCartItem(CartItem item) {
@@ -58,5 +59,10 @@ public class Cart extends AggregateRoot<UUID> {
 
     public double getTotal() {
         return this.items.stream().mapToDouble(CartItem::getTotal).sum();
+    }
+
+
+    public void checkout() {
+        addDomainEvent(new CartCheckedOutEvent(userId, id , items));
     }
 }

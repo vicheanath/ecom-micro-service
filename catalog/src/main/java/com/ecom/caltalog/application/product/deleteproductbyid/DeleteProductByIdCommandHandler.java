@@ -5,7 +5,7 @@ import com.ecom.shared.application.CommandHandler;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeleteProductByIdCommandHandler implements CommandHandler<DeleteProductByIdCommand,Void> {
+public class DeleteProductByIdCommandHandler implements CommandHandler<DeleteProductByIdCommand, Void> {
 
     private final ProductRepository repository;
 

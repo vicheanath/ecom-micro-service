@@ -33,5 +33,9 @@ public class OrderItem extends ValueObject {
         this.productId = productId;
     }
 
+    public float getTotalPrice() {
+        return quantity * price;
+    }
+
 
 }

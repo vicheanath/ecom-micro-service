@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GetProductByIdQuery implements  Query<GetProductByIdDto> {
+public class GetProductByIdQuery implements Query<GetProductByIdDto> {
     @NotEmpty
     @NotBlank
     private String id;

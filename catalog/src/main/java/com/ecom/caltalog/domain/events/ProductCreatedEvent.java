@@ -7,9 +7,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductCreatedEvent extends BaseDomainEvent {
-    public String id;
+    public String productId;
     public String name;
     public double price;
-    public String imageUrl;
-    public String categoryId;
+    public int quantity;
 }

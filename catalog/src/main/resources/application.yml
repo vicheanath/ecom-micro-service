@@ -12,9 +12,9 @@ spring:
       password: password
 
   rabbitmq:
-        addresses: localhost
-        username: guest
-        password: guest
+    addresses: localhost
+    username: guest
+    password: guest
 
 eureka:
   client:

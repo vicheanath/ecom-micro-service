@@ -1,32 +1,31 @@
 package com.ecom.caltalog.application.product.createproduct;
 
 import com.ecom.caltalog.domain.events.ProductCreatedEvent;
+import com.ecom.caltalog.infrastructure.RabbitMqConfig;
 import com.ecom.caltalog.infrastructure.messaging.RabbitMqIntegrationEventPublisher;
-import com.integration.ProductCreatedIntegrationEvent;
+import com.integration.catalog.ProductCreatedIntegrationEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
-public class CreateProductEventHandler {
+public class CreateProductEventPublisher {
     private final RabbitMqIntegrationEventPublisher eventPublisher;
 
-    public CreateProductEventHandler(RabbitMqIntegrationEventPublisher eventPublisher) {
+    public CreateProductEventPublisher(RabbitMqIntegrationEventPublisher eventPublisher) {
 
         this.eventPublisher = eventPublisher;
     }
+
     @TransactionalEventListener
     public void handle(ProductCreatedEvent event) {
 
         ProductCreatedIntegrationEvent integrationEvent = map(event);
-        eventPublisher.publish("product", "product.created", integrationEvent);
-        System.out.println("Published integration event: " + integrationEvent.getClass().getSimpleName());
-
+        eventPublisher.publish(RabbitMqConfig.EXCHANGE, RabbitMqConfig.ROUTING_KEY, integrationEvent);
     }
 
     private ProductCreatedIntegrationEvent map(ProductCreatedEvent event) {
-        return new ProductCreatedIntegrationEvent(event.getId(), event.getName(), event.getPrice(), event.getImageUrl(), event.getCategoryId());
+        return new ProductCreatedIntegrationEvent(event.getProductId(), event.getName(), event.getPrice(), event.getQuantity());
     }
-
 
 
 }
