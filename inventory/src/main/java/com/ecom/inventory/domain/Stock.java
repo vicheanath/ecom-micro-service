@@ -37,6 +37,10 @@ public class Stock extends AggregateRoot<UUID> {
         return new Stock(id, productId, availableStock, reservedStock);
     }
 
+    public void syncStock(int availableStock) {
+        this.availableStock = availableStock;
+    }
+
     public void adjustStock(StockAdjustment stockAdjustment) {
         stockAdjustments.add(stockAdjustment);
         availableStock += stockAdjustment.getQuantity();

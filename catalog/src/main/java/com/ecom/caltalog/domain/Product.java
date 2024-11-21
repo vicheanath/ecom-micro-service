@@ -31,19 +31,19 @@ public class Product extends AggregateRoot<String> {
     @DBRef
     private Category category;
 
-    private Product(String id, String name, String description, double price, int qty, String imageUrl, Category category) {
+    private Product(String id, String name, String description, double price, int quantity, String imageUrl, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
-        this.quantity = qty;
+        this.quantity = quantity;
     }
 
-    public static Product create(String id, String name, String description, int qty, double price, String imageUrl, Category category) {
-        var product = new Product(id, name, description, price, qty, imageUrl, category);
-        product.addDomainEvent(new ProductCreatedEvent(product.getId(), name, price, qty));
+    public static Product create(String id, String name, String description, int quantity, double price, String imageUrl, Category category) {
+        var product = new Product(id, name, description, price, quantity, imageUrl, category);
+        product.addDomainEvent(new ProductCreatedEvent(product.getId(), name, price, quantity));
         return product;
     }
 

@@ -38,8 +38,9 @@ public class CreateProductCommandHandler implements CommandHandler<CreateProduct
                 command.getImageUrl(),
                 category);
 
-        productRepository.save(product);
         jpaDomainEventInterceptor.publishEvents(product);
+        product.clearDomainEvents();
+        productRepository.save(product);
 
         return null;
     }

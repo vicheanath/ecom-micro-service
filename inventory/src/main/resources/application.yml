@@ -27,3 +27,8 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /inventory/swagger-ui.html
+
+logging:
+  log4j2:
+    config:
+      override: true
