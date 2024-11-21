@@ -15,7 +15,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
     url: jdbc:mysql://localhost:3386/db_user
-    driver-class-name: com.mysql.cj.jdbc.Driver
     username: user_db_user
     password: password_user_db_user
 eureka:
@@ -30,5 +29,5 @@ management:
 springdoc:
   swagger-ui:
     enabled: true
-    path: /auth/swagger-ui.html
+    path: /swagger-ui.html
 
