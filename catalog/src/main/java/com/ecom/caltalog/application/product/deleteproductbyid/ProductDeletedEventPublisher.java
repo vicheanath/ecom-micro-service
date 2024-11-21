@@ -1,11 +1,9 @@
 package com.ecom.caltalog.application.product.deleteproductbyid;
 
 import com.ecom.caltalog.domain.events.ProductDeletedEvent;
-import com.ecom.caltalog.domain.events.ProductUpdatedEvent;
 import com.ecom.caltalog.infrastructure.RabbitMqConfig;
 import com.ecom.caltalog.infrastructure.messaging.RabbitMqIntegrationEventPublisher;
 import com.integration.catalog.ProductDeletedEventIntegrationEvent;
-import com.integration.catalog.ProductUpdatedIntegrationEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 

@@ -1,10 +1,8 @@
 package com.ecom.authentication.domain.event;
 
 import com.ecom.shared.domain.BaseDomainEvent;
-import com.ecom.shared.domain.DomainEvent;
 import lombok.Data;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @Data

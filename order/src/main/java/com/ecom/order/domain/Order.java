@@ -37,7 +37,7 @@ public class Order extends AggregateRoot<UUID> {
     private List<OrderItem> orderItems = new ArrayList<>();
 
 
-    private Order( UUID customerId) {
+    private Order(UUID customerId) {
         this.customerId = customerId;
         this.status = OrderStatus.PENDING;
         calculateTotalPrice();
@@ -52,6 +52,7 @@ public class Order extends AggregateRoot<UUID> {
         order.addDomainEvent(new OrderCreatedEvent(id, userId, order.totalPrice, order.orderItems, order.status));
         return order;
     }
+
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
     }

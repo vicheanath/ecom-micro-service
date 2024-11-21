@@ -1,3 +1,4 @@
 package com.ecom.shared.application;
 
-public interface Query<R> {}
+public interface Query<R> {
+}

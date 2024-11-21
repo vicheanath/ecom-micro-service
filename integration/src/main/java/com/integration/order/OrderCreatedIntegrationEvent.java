@@ -16,6 +16,13 @@ public class OrderCreatedIntegrationEvent extends IntegrationEvent {
     private final List<OrderItem> items;
     private final OrderStatus status;
 
+    public enum OrderStatus {
+        PENDING,
+        COMPLETED,
+        SHIPPED,
+        CANCELLED
+    }
+
     public static class OrderItem {
         private final UUID productId;
         private final int quantity;
@@ -26,12 +33,5 @@ public class OrderCreatedIntegrationEvent extends IntegrationEvent {
             this.quantity = quantity;
             this.price = price;
         }
-    }
-
-    public enum OrderStatus {
-        PENDING,
-        COMPLETED,
-        SHIPPED,
-        CANCELLED
     }
 }

@@ -16,6 +16,7 @@ public class UserLoginCommand implements Command<UserLoginResponse> {
         this.username = username;
         this.password = password;
     }
+
     public UserLoginCommand() {
     }
 

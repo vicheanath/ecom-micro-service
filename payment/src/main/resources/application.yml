@@ -1,20 +1,20 @@
 spring:
   application:
-        name: payment-service
+    name: payment-service
   rabbitmq:
     addresses: localhost
     username: guest
     password: guest
   jpa:
     hibernate:
-        ddl-auto: update
+      ddl-auto: update
     show-sql: true
   datasource:
-        url: jdbc:mysql://localhost:3386/db_payment
-        username: user_db_payment
-        password: password_user_db_payment
+    url: jdbc:mysql://localhost:3386/db_payment
+    username: user_db_payment
+    password: password_user_db_payment
 server:
-    port: 8088
+  port: 8088
 
 springdoc:
   swagger-ui:

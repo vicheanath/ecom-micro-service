@@ -1,20 +1,20 @@
 spring:
   application:
-        name: cart-service
+    name: cart-service
   rabbitmq:
     addresses: localhost
     username: guest
     password: guest
   jpa:
     hibernate:
-        ddl-auto: update
+      ddl-auto: update
     show-sql: true
   datasource:
-        url: jdbc:mysql://localhost:3386/db_cart
-        username: user_db_cart
-        password: password_user_db_cart
+    url: jdbc:mysql://localhost:3386/db_cart
+    username: user_db_cart
+    password: password_user_db_cart
 server:
-    port: 8083
+  port: 8083
 
 eureka:
   client:

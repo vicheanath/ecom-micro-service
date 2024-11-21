@@ -1,8 +1,9 @@
-
 ### **1. Catalog Service Integration Events**
+
 **Responsibility**: Manage product catalog.
 
 #### Events:
+
 1. **`ProductCreated`**
     - **Payload**:
       ```json
@@ -43,9 +44,11 @@
 ---
 
 ### **2. Order Service Integration Events**
+
 **Responsibility**: Manage customer orders.
 
 #### Events:
+
 1. **`OrderCreated`**
     - **Payload**:
       ```json
@@ -91,9 +94,11 @@
 ---
 
 ### **3. Cart Service Integration Events**
+
 **Responsibility**: Manage user carts.
 
 #### Events:
+
 1. **`CartItemAdded`**
     - **Payload**:
       ```json
@@ -124,9 +129,11 @@
 ---
 
 ### **4. Payment Service Integration Events**
+
 **Responsibility**: Handle payments for orders.
 
 #### Events:
+
 1. **`PaymentInitiated`**
     - **Payload**:
       ```json
@@ -170,9 +177,11 @@
 ---
 
 ### **5. Inventory Service Integration Events**
+
 **Responsibility**: Manage product stock.
 
 #### Events:
+
 1. **`StockReserved`**
     - **Payload**:
       ```json
@@ -230,6 +239,7 @@
 ### **6. Integration Flow Example**
 
 #### Scenario: Order Placement
+
 1. **Cart Service**:
     - Publishes `CartCheckedOut`.
 2. **Order Service**:
@@ -247,34 +257,29 @@
 ```mermaid
 graph TD
 %% Catalog Service
-   CatalogService[Catalog Service]
-   CartService[Cart Service]
-   OrderService[Order Service]
-   PaymentService[Payment Service]
-   InventoryService[Inventory Service]
-
+    CatalogService[Catalog Service]
+    CartService[Cart Service]
+    OrderService[Order Service]
+    PaymentService[Payment Service]
+    InventoryService[Inventory Service]
 %% Catalog Service Events
-   CatalogService -- ProductCreated --> InventoryService
-   CatalogService -- ProductUpdated --> InventoryService & CartService
-   CatalogService -- ProductDeleted --> InventoryService & CartService
-
+    CatalogService -- ProductCreated --> InventoryService
+    CatalogService -- ProductUpdated --> InventoryService & CartService
+    CatalogService -- ProductDeleted --> InventoryService & CartService
 %% Cart Service Events
-   CartService -- CartItemAdded --> InventoryService
-   CartService -- CartCheckedOut --> OrderService
-
+    CartService -- CartItemAdded --> InventoryService
+    CartService -- CartCheckedOut --> OrderService
 %% Order Service Events
-   OrderService -- OrderCreated --> InventoryService & PaymentService
-   OrderService -- OrderCancelled --> InventoryService & PaymentService
-   OrderService -- OrderCompleted --> InventoryService
-
+    OrderService -- OrderCreated --> InventoryService & PaymentService
+    OrderService -- OrderCancelled --> InventoryService & PaymentService
+    OrderService -- OrderCompleted --> InventoryService
 %% Payment Service Events
-   PaymentService -- PaymentInitiated --> OrderService
-   PaymentService -- PaymentCompleted --> OrderService & InventoryService
-   PaymentService -- PaymentFailed --> OrderService & InventoryService
-
+    PaymentService -- PaymentInitiated --> OrderService
+    PaymentService -- PaymentCompleted --> OrderService & InventoryService
+    PaymentService -- PaymentFailed --> OrderService & InventoryService
 %% Inventory Service Events
-   InventoryService -- StockReserved --> OrderService
-   InventoryService -- StockReleased --> OrderService
-   InventoryService -- StockDeducted --> OrderService
-   InventoryService -- StockUpdated --> CatalogService
+    InventoryService -- StockReserved --> OrderService
+    InventoryService -- StockReleased --> OrderService
+    InventoryService -- StockDeducted --> OrderService
+    InventoryService -- StockUpdated --> CatalogService
 ```

@@ -9,7 +9,7 @@ import com.ecom.shared.application.CommandHandler;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RefundPaymentCommandHandler implements CommandHandler<RefundPaymentCommand,Void> {
+public class RefundPaymentCommandHandler implements CommandHandler<RefundPaymentCommand, Void> {
 
     private final MasterCardPaymentGateway masterCardPaymentGateway;
     private final PaymentRepository paymentRepository;
@@ -20,6 +20,7 @@ public class RefundPaymentCommandHandler implements CommandHandler<RefundPayment
         this.paymentRepository = paymentRepository;
         this.paypalPaymentGateway = paypalPaymentGateway;
     }
+
     @Override
     public Void handle(RefundPaymentCommand command) {
 
@@ -31,9 +32,9 @@ public class RefundPaymentCommandHandler implements CommandHandler<RefundPayment
     }
 
     private void doRefundPaymentByGateway(Payment payment) {
-        if (payment.getPaymentMethod().equals(PaymetMethodEnum.MASTER_CARD)){
+        if (payment.getPaymentMethod().equals(PaymetMethodEnum.MASTER_CARD)) {
             masterCardPaymentGateway.refundPayment(payment.getTransactionId());
-        } else if (payment.getPaymentMethod().equals(PaymetMethodEnum.PAYPAL)){
+        } else if (payment.getPaymentMethod().equals(PaymetMethodEnum.PAYPAL)) {
             paypalPaymentGateway.refundPayment(payment.getTransactionId());
         }
     }

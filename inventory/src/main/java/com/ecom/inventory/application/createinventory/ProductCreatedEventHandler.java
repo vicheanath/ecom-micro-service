@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class ProductCreatedEventHandler  {
+public class ProductCreatedEventHandler {
 
     private final StockRepository inventoryRepository;
 
@@ -20,7 +20,7 @@ public class ProductCreatedEventHandler  {
 
     @RabbitListener(queues = RabbitMqConfig.QUEUE)
     public void handle(ProductCreatedIntegrationEvent event) {
-        var inventory = Stock.create(UUID.randomUUID(), UUID.fromString(event.getProductId()),event.getQuantity(),0);
+        var inventory = Stock.create(UUID.randomUUID(), UUID.fromString(event.getProductId()), event.getQuantity(), 0);
         inventoryRepository.save(inventory);
     }
 

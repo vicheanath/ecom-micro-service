@@ -1,6 +1,6 @@
 package com.ecom.inventory.domain;
 
-public  enum StockAdjustmentReason {
+public enum StockAdjustmentReason {
     DAMAGED,
     LOST,
     THEFT,
