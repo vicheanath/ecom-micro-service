@@ -8,7 +8,7 @@ import java.util.UUID;
 @Data
 public class AddProductToCardCommand implements Command<Void> {
 
-    public UUID customerId;
+    public UUID userId;
     public UUID cartId;
     public UUID productId;
     public Integer quantity;

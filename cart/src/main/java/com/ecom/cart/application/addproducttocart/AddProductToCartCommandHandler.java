@@ -5,7 +5,6 @@ import com.ecom.cart.domain.CartItem;
 import com.ecom.cart.infrastructure.repositories.CartRepository;
 import com.ecom.cart.infrastructure.repositories.ProductRepository;
 import com.ecom.shared.application.CommandHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,9 +13,7 @@ import java.util.UUID;
 @Service
 public class AddProductToCartCommandHandler implements CommandHandler<AddProductToCardCommand, Void> {
 
-    @Autowired
     private final CartRepository cartRepository;
-    @Autowired
     private final ProductRepository productRepository;
 
     public AddProductToCartCommandHandler(CartRepository cartRepository, ProductRepository productRepository) {
@@ -26,7 +23,7 @@ public class AddProductToCartCommandHandler implements CommandHandler<AddProduct
 
     @Override
     public Void handle(AddProductToCardCommand command) {
-        var cart = ifCartNotExistCreate(command.getCartId(), command.getCustomerId());
+        var cart = ifCartNotExistCreate(command.getCartId(), command.getUserId());
         var product = productRepository.findById(command.getProductId()).orElseThrow(() -> new RuntimeException("Product not found"));
         var cartItem = CartItem.create(command.getQuantity(), product.getPrice(), product);
         cart.addCartItem(cartItem);

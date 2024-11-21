@@ -16,7 +16,7 @@ public class GetCartByCustomerIdQueryHandler implements QueryHandler<GetCartByCu
 
     @Override
     public GetCartByCustomerIdResponseDto handle(GetCartByCustomerIdQuery command) {
-        Cart cart = cartRepository.findByCustomerId((command.customerId))
+        Cart cart = cartRepository.findByUserId((command.customerId))
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
 
         return new GetCartByCustomerIdResponseDto(
